@@ -52,7 +52,10 @@ void doit(int fd) {
   /* Read request line and headers */
   Rio_readinitb(&rio, fd);
   Rio_readlineb(&rio, buf, MAXLINE);
+  //printf("Request headers:\n");
+  //printf("%s", buf);
   sscanf(buf, "%s %s %s", method, uri, version);                    // 11.6.C HTTP 버전 정보 추출
+  //printf("HTTP version: %s\n", version);                            // 11.6.C 브라우저 버전 출력
   if (strcasecmp(method, "GET") && strcasecmp(method, "HEAD")) {    // 11.10 HTTP HEAD method
     clienterror(fd, method, "501", "Not implemented", "Tiny does not implement this method");
     return; 
